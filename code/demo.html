@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <!-- <div id="app">
+        <button @click="roll">滚起来</button>
+        <button @click="stop">停下啦</button>
+        <p>{{msg}}</p>
+    </div>
+    <script>
+        let vm=new Vue({
+            el:"#app",
+            data:{
+                msg:"中华人民共和国!",
+                timerId:null
+            },
+            methods:{
+                roll(){
+                    //substr:参数1开始的索引, 参数2,截取多少个
+                    //substring;参数1,开始的索引  参数2 结束的索引
+    
+               clearInterval(this.timerId)
+                this.timerId=setInterval(() => {
+                    let start = this.msg.substr(0,1);
+                    let end = this.msg.substr(1);
+
+                    this.msg=end + start
+                }, 400);
+                },
+                stop(){
+                    clearInterval(this.timerId)
+                }
+                
+            }
+        })
+    </script> -->
+    <div id="app">
+        <button @click="start">滚动</button>
+        <button @click="stop">停止</button>
+        <p>{{ msg }}</p>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                msg:"忽如一夜春风来,千树万树梨花开.",
+                timeId:null
+            },
+            methods:{
+                start(){
+                    // alert(1)
+                    clearInterval(this.timeId)
+                this.timeId=setInterval(()=>{
+                        const head = this.msg.substring(0,1)
+                        const end =this.msg.substring(1)
+                        this.msg=end+head
+                    },200)
+                },
+                stop(){
+                    clearInterval(this.timeId)
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>
