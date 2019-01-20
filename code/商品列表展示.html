@@ -22,14 +22,16 @@
                     <input type="text" class="form-control" v-model="id">
                 </label>
                 <label>
+                    <!-- @click.enter="" 按键修饰符.  自定义按键修饰符也可添加按键码值   自定义全局按键修饰符Vue.config.keyCodes-->
                         name:
-                        <input type="text" class="form-control" v-model="name">
+                        <input type="text" class="form-control" v-model="name" @keyup.enter="add">
                     </label>
                     <!-- 在vue中添加事件绑定机制,如果加了()就可以给我们的函数传参数 -->
                     <input type="button" value="添加" class="btn btn-primay" @click="add()">
                     <label>
                             搜索关键字:
-                            <input type="text" class="form-control" v-model="keyword">
+                            <!-- 自动获取焦点autofocus -->
+                            <input autofocus type="text" class="form-control" v-model="keyword">
                         </label>
               </div>
           </div>
@@ -56,7 +58,7 @@
                   </table>
     </div>
     <script>
-
+// 过滤器添加    利用一个插件comm
         Vue.filter('dateFormat',function(dateStr){
             var dt=new Date(dateStr)
 
@@ -66,6 +68,7 @@
 
             return `${y}-${m}-${d}`;
         })
+// 按键修饰符.可以在全局中声明自己的按钮修饰符Vue.config.keyCodes.f1=112;
         new Vue({
             el:"#app",
             data:{
@@ -127,6 +130,15 @@
         // findIndex查询数组中的索引
            
         })
+
+        // 自定义指令:Vue.directive('自自定义名称',{}对象)
+        // 在vue内部提供了很多指令:除了内部的这些指令外,开发者还可以自定义指令因为开发者还可以根据局自己需求进行一些封装指令,.定义全局指令:Vue.directive定义去哪聚指令有两个参数(参数1是指令,参数一个对象)对象中有5个函数,当指令应用到标签上时,        //bind:function(el){
+            //el.注意在每个函数 中,第一个参数永远是el表示被绑定
+       // } 绑定的时候
+
+        //inserted:function(){} 插入的时候
+
+        //updated:function(){}  当Vnode组件更新的时候会触发
     </script>
 </body>
 </html>
