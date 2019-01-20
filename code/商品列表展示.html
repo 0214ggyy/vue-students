@@ -47,7 +47,7 @@
                      <tr v-for="item in search(keyword)" :key="item.id">
                          <td>{{item.id}}</td>
                          <td v-text="item.name"></td>
-                         <td>{{item.ctime}}</td>
+                         <td>{{item.ctime | dateFormat}}</td>
                          <td>
                              <a href="javascript:;"  @click.prevent="del(item.id)">删除</a>
                          </td>
@@ -56,6 +56,16 @@
                   </table>
     </div>
     <script>
+
+        Vue.filter('dateFormat',function(dateStr){
+            var dt=new Date(dateStr)
+
+            var y=dt.getFullYear();
+            var m=dt.getMonth()+1;
+            var d =dt.getDate();
+
+            return `${y}-${m}-${d}`;
+        })
         new Vue({
             el:"#app",
             data:{
