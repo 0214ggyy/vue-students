@@ -47,6 +47,11 @@
     </div>
 <script src="./lib/moment.js"></script>
     <script>
+        //只能用相对路径
+        Vue.http.options.root='http://vue.lovegf.cn:8899/api'
+        //
+        Vue.http.options.emulateJSON=true
+
         new Vue({
             el:'#app',
             data:{
@@ -62,7 +67,7 @@
             methods: {
                 // http://vue.lovegf.cn:8899/api/getprodlist
                 add(){
-                    this.$http.post('http://vue.lovegf.cn:8899/api/addproduct',{name:this.name},{emulateJSON:true}).then(result=>{
+                    this.$http.post('addproduct',{name:this.name}).then(result=>{
                         if(result.body.status === 0){
                             this.getAllList()
                         }else{
@@ -72,7 +77,7 @@
                 },
             
                 getAllList(){
-                    this.$http.get('http://vue.lovegf.cn:8899/api/getprodlist').then(result=>{
+                    this.$http.get('getprodlist').then(result=>{
                         // console.log(result);
                         
                         if(result.body.status === 0){
@@ -83,7 +88,7 @@
                     })
                 },
                 del(id){
-                    this.$http.get('http://vue.lovegf.cn:8899/api/delproduct/' + id).then(result=>{
+                    this.$http.get('delproduct/' + id).then(result=>{
                         if(result.body.status === 0){
                             this.getAllList()
                         }else{
