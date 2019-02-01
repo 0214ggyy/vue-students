@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
+        <!-- 安装路由模块vue-router -->
+        <script src="./lib/vue-router.js"></script>
+    </head>
+    <body>
+        <div id="app">
+                <!-- <a href="#/login">登录</a>
+                <a href="#/register">注册</a> -->
+                <router-link to="#/login?id=10">登录</router-link>
+
+                <router-link to="#/register">注册</router-link>
+            <router-view></router-view>
+            
+
+        </div>
+
+        <script>
+        var login={
+            template:`<h1>注册页面--- {{ $route.query.id }}--</h1>`,
+            created() {
+                //组建得生命周期钩子
+                console.log(this.$route);
+                console.log(this.$route.query.id);
+
+                
+            },
+        }
+        var register={
+            template:`<h1>登录页面</h1>`
+        }
+        const router = new VueRouter({
+                routes:[
+                    {path:'/',redirect:'/login'},//路径重定向
+                    {path:'/login',component:login},
+                    {path:'/register',component:register}
+                ]
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                },methods: {
+                    
+                },
+                router:router
+            })
+        </script>
+       <!-- 注册组件跟路由没有什么关系,仅仅是匹配关系 -->
+    </body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue.js"></script>
+        <script src="./lib/vue-router.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <router-view></router-view>
+        </div>
+        <template id="news-list">
+            <div class="new-list">
+                <h1>这是列表页</h1>
+                <ul>
+                    <!-- <li v-for="item in newList" :key="item.id"> -->
+                            <!-- {{ item.id }} === {{ item.title }}====={{ item.content }} -->
+
+                            <!-- query传参 -->
+                            <router-link tag="li"  :to="'/newInfo?id=' + item.id "  v-for="item in newList" :key="item.id">
+                                <!-- 属性绑定的作用,将to属性的值作为表达式来解析,如果没有加属性绑定直接写代码,则表示纯文本字符串   -->
+                                <!-- :to="'/newInfo?id=' + item.id " 加冒号就是属性绑定这样,后面的代码可以当做js代码来解析 -->
+                                <!-- to="/newInfo?id=item.id "  不加冒号,后面的代码只是单纯的字符拼接 -->
+                                    <p>标题 {{ item.title }}</p>
+                                    <p>内容 {{ item.content }}</p>
+                            </router-link>
+                           
+                            <!-- params传参 -->
+                            <router-link tag="li"  :to="'/newInfo/' + item.id "  v-for="item in newList" :key="item.id">
+                                <!-- 属性绑定的作用,将to属性的值作为表达式来解析,如果没有加属性绑定直接写代码,则表示纯文本字符串   -->
+                                <!-- :to="'/newInfo?id=' + item.id " 加冒号就是属性绑定这样,后面的代码可以当做js代码来解析 -->
+                                <!-- to="/newInfo?id=item.id "  不加冒号,后面的代码只是单纯的字符拼接 -->
+                                    <p>标题 {{ item.title }}</p>
+                                    <p>内容 {{ item.content }}</p>
+                            </router-link>
+                    <!-- </li> -->
+                </ul>
+            </div>
+        </template>
+        <template id="news-info">
+                <div class="new-info">
+                    <h1>这是详情页 -- {{ $route.query.id }} -- {{ $route.params.id }}</h1>
+                </div>
+            </template>
+        <script>
+            // 取名字可以根据分类如
+            // 列表
+            let newListto={
+                template:'#news-list',
+                data() {
+                    return {
+                        newList:[
+                            {id:1,title:'这里有料',content:'舌尖的味道'},
+                            {id:2,title:'僵尸指望',content:'放屁的味道'},
+                            {id:3,title:'这里有料',content:'舌尖的味道'},
+                            {id:4,title:'这里有料',content:'舌尖的味道'},
+                            {id:5,title:'这里有料',content:'舌尖的味道'},
+                            {id:6,title:'这里有料',content:'舌尖的味道'}
+                        ]
+                    }
+                },
+                
+            }
+            let newInfoto={
+                template:'#news-info',
+                created() {
+                    console.log(this.$route);
+                    
+                },
+            }
+            let router= new VueRouter({
+                routes: [
+                    {path:'/',redirect:'/newList'},
+                    {path:'/newList',component:newListto},
+                    {path:'/newInfo',component:newInfoto},
+                    {path:'/newInfo/:id',component:newInfoto}
+                
+                ]
+            })
+            new Vue({
+                el: '#app',
+                data: {
+
+                },
+                methods: {
+                    
+                },
+                components:{
+
+                },
+                router:router
+            })
+        </script>
+    </body>
+</html>
