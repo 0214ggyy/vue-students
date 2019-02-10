@@ -35,7 +35,7 @@
 总结梳理： webpack 中如何使用 vue :
 
 1. 安装vue的包：  cnpm i vue -S
-2. 由于 在 webpack 中，推荐使用 .vue 这个组件模板文件定义组件，所以，需要安装 能解析这种文件的 loader    cnpm i vue-loader vue-template-complier -D
+2. 由于 在 webpack 中，推荐使用 .vue 这个组件模板文件定义组件，所以，需要安装 能解析这种文件的 loader    cnpm i vue-loader vue-template-compiler -D
 + 配置vue-loader
 + 安装VueLoaderPlugin在webpack.config.js文件中
 3. 在 main.js 中，导入 vue 模块  import Vue from 'vue'
